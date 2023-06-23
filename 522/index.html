@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>💗</title>
+ 
+    <style>
+      html,
+      body {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        background: #000;
+      }
+      canvas {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: anim 1.5s ease-in-out infinite;
+        -webkit-animation: anim 1.5s ease-in-out infinite;
+        -o-animation: anim 1.5s ease-in-out infinite;
+        -moz-animation: anim 1.5s ease-in-out infinite;
+      }
+      #name {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: -20px;
+        font-size: 46px;
+        color: #ea80b0;
+      }
+      @keyframes anim {
+        0% {
+          transform: scale(0.8);
+        }
+        25% {
+          transform: scale(0.7);
+        }
+        50% {
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(0.7);
+        }
+        100% {
+          transform: scale(0.8);
+        }
+      }
+      @-webkit-keyframes anim {
+        0% {
+          -webkit-transform: scale(0.8);
+        }
+        25% {
+          -webkit-transform: scale(0.7);
+        }
+        50% {
+          -webkit-transform: scale(1);
+        }
+        75% {
+          -webkit-transform: scale(0.7);
+        }
+        100% {
+          -webkit-transform: scale(0.8);
+        }
+      }
+      @-o-keyframes anim {
+        0% {
+          -o-transform: scale(0.8);
+        }
+        25% {
+          -o-transform: scale(0.7);
+        }
+        50% {
+          -o-transform: scale(1);
+        }
+        75% {
+          -o-transform: scale(0.7);
+        }
+        100% {
+          -o-transform: scale(0.8);
+        }
+      }
+      @-moz-keyframes anim {
+        0% {
+          -moz-transform: scale(0.8);
+        }
+        25% {
+          -moz-transform: scale(0.7);
+        }
+        50% {
+          -moz-transform: scale(1);
+        }
+        75% {
+          -moz-transform: scale(0.7);
+        }
+        100% {
+          -moz-transform: scale(0.8);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="pinkboard"></canvas>
+    <!-- 在下面加名字 -->
+     <div id="name" style="color: Gold;">新年快乐</div> 
+ 
+    <script>
+      var settings = {
+        particles: {
+          length: 500, 
+          duration: 2, 
+          velocity: 200, 
+          effect: -1.55,
+          size: 30, 
+        },
+      };
+      (function () {
+        var b = 0;
+        var c = ["ms", "moz", "webkit", "o"];
+        for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) {
+          window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"];
+          window.cancelAnimationFrame =
+            window[c[a] + "CancelAnimationFrame"] ||
+            window[c[a] + "CancelRequestAnimationFrame"];
+        }
+        if (!window.requestAnimationFrame) {
+          window.requestAnimationFrame = function (h, e) {
+            var d = new Date().getTime();
+            var f = Math.max(0, 16 - (d - b));
+            var g = window.setTimeout(function () {
+              h(d + f);
+            }, f);
+            b = d + f;
+            return g;
+          };
+        }
+        if (!window.cancelAnimationFrame) {
+          window.cancelAnimationFrame = function (d) {
+            clearTimeout(d);
+          };
+        }
+      })();
+      var Point = (function () {
+        function Point(x, y) {
+          this.x = typeof x !== "undefined" ? x : 0;
+          this.y = typeof y !== "undefined" ? y : 0;
+        }
+        Point.prototype.clone = function () {
+          return new Point(this.x, this.y);
+        };
+        Point.prototype.length = function (length) {
+          if (typeof length == "undefined")
+            return Math.sqrt(this.x * this.x + this.y * this.y);
+          this.normalize();
+          this.x *= length;
+          this.y *= length;
+          return this;
+        };
+        Point.prototype.normalize = function () {
+          var length = this.length();
+          this.x /= length;
+          this.y /= length;
+          return this;
+        };
+        return Point;
+      })();
+      var Particle = (function () {
+        function Particle() {
+          this.position = new Point();
+          this.velocity = new Point();
+          this.acceleration = new Point();
+          this.age = 0;
+        }
+        Particle.prototype.initialize = function (x, y, dx, dy) {
+          this.position.x = x;
+          this.position.y = y;
+          this.velocity.x = dx;
+          this.velocity.y = dy;
+          this.acceleration.x = dx * settings.particles.effect;
+          this.acceleration.y = dy * settings.particles.effect;
+          this.age = 0;
+        };
+        Particle.prototype.update = function (deltaTime) {
+          this.position.x += this.velocity.x * deltaTime;
+          this.position.y += this.velocity.y * deltaTime;
+          this.velocity.x += this.acceleration.x * deltaTime;
+          this.velocity.y += this.acceleration.y * deltaTime;
+          this.age += deltaTime;
+        };
+        Particle.prototype.draw = function (context, image) {
+          function ease(t) {
+            return --t * t * t + 1;
+          }
+          var size = image.width * ease(this.age / settings.particles.duration);
+          context.globalAlpha = 1 - this.age / settings.particles.duration;
+          context.drawImage(
+            image,
+            this.position.x - size / 2,
+            this.position.y - size / 2,
+            size,
+            size
+          );
+        };
+        return Particle;
+      })();
+      var ParticlePool = (function () {
+        var particles,
+          firstActive = 0,
+          firstFree = 0,
+          duration = settings.particles.duration;
+ 
+        function ParticlePool(length) {
+          particles = new Array(length);
+          for (var i = 0; i < particles.length; i++)
+            particles[i] = new Particle();
+        }
+        ParticlePool.prototype.add = function (x, y, dx, dy) {
+          particles[firstFree].initialize(x, y, dx, dy);
+          firstFree++;
+          if (firstFree == particles.length) firstFree = 0;
+          if (firstActive == firstFree) firstActive++;
+          if (firstActive == particles.length) firstActive = 0;
+        };
+        ParticlePool.prototype.update = function (deltaTime) {
+          var i;
+          if (firstActive < firstFree) {
+            for (i = firstActive; i < firstFree; i++)
+              particles[i].update(deltaTime);
+          }
+          if (firstFree < firstActive) {
+            for (i = firstActive; i < particles.length; i++)
+              particles[i].update(deltaTime);
+            for (i = 0; i < firstFree; i++) particles[i].update(deltaTime);
+          }
+          while (
+            particles[firstActive].age >= duration &&
+            firstActive != firstFree
+          ) {
+            firstActive++;
+            if (firstActive == particles.length) firstActive = 0;
+          }
+        };
+        ParticlePool.prototype.draw = function (context, image) {
+          if (firstActive < firstFree) {
+            for (i = firstActive; i < firstFree; i++)
+              particles[i].draw(context, image);
+          }
+          if (firstFree < firstActive) {
+            for (i = firstActive; i < particles.length; i++)
+              particles[i].draw(context, image);
+            for (i = 0; i < firstFree; i++) particles[i].draw(context, image);
+          }
+        };
+        return ParticlePool;
+      })();
+      (function (canvas) {
+        var context = canvas.getContext("2d"),
+          particles = new ParticlePool(settings.particles.length),
+          particleRate =
+            settings.particles.length / settings.particles.duration, 
+          time;
+        function pointOnHeart(t) {
+          return new Point(
+            160 * Math.pow(Math.sin(t), 3),
+            130 * Math.cos(t) -
+              50 * Math.cos(2 * t) -
+              20 * Math.cos(3 * t) -
+              10 * Math.cos(4 * t) +
+              25
+          );
+        }
+        var image = (function () {
+          var canvas = document.createElement("canvas"),
+            context = canvas.getContext("2d");
+          canvas.width = settings.particles.size;
+          canvas.height = settings.particles.size;
+          function to(t) {
+            var point = pointOnHeart(t);
+            point.x =
+              settings.particles.size / 2 +
+              (point.x * settings.particles.size) / 350;
+            point.y =
+              settings.particles.size / 2 -
+              (point.y * settings.particles.size) / 350;
+            return point;
+          }
+          context.beginPath();
+          var t = -Math.PI;
+          var point = to(t);
+          context.moveTo(point.x, point.y);
+          while (t < Math.PI) {
+            t += 0.01;
+            point = to(t);
+            context.lineTo(point.x, point.y);
+          }
+          context.closePath();
+          context.fillStyle = "#ea80b0";
+          context.fill();
+          var image = new Image();
+          image.src = canvas.toDataURL();
+          return image;
+        })();
+        function render() {
+          requestAnimationFrame(render);
+          var newTime = new Date().getTime() / 1000,
+            deltaTime = newTime - (time || newTime);
+          time = newTime;
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          var amount = particleRate * deltaTime;
+          for (var i = 0; i < amount; i++) {
+            var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
+            var dir = pos.clone().length(settings.particles.velocity);
+            particles.add(
+              canvas.width / 2 + pos.x,
+              canvas.height / 2 - pos.y,
+              dir.x,
+              -dir.y
+            );
+          }
+          particles.update(deltaTime);
+          particles.draw(context, image);
+        }
+        function onResize() {
+          canvas.width = canvas.clientWidth;
+          canvas.height = canvas.clientHeight;
+        }
+        window.onresize = onResize;
+        setTimeout(function () {
+          onResize();
+          render();
+        }, 10);
+      })(document.getElementById("pinkboard"));
+ 
+    </script>
+
+ <body>
+<script>
+function clickEffect() {
+let balls = [];
+let longPressed = false;
+let longPress;
+let multiplier = 0;
+let width, height;
+let origin;
+let normal;
+let ctx;
+const colours = ["#F73859", "#14FFEC", "#00E0FF", "#FF99FE", "#FAF15D"];
+const canvas = document.createElement("canvas");
+document.body.appendChild(canvas);
+canvas.setAttribute("style", "width: 100%; height: 100%; top: 0; left: 0; z-index: 99999; position: fixed; pointer-events: none;");
+const pointer = document.createElement("span");
+pointer.classList.add("pointer");
+document.body.appendChild(pointer);
+
+if (canvas.getContext && window.addEventListener) {
+  ctx = canvas.getContext("2d");
+  updateSize();
+  window.addEventListener('resize', updateSize, false);
+  loop();
+  window.addEventListener("mousedown", function(e) {
+    pushBalls(randBetween(10, 20), e.clientX, e.clientY);
+    document.body.classList.add("is-pressed");
+    longPress = setTimeout(function(){
+      document.body.classList.add("is-longpress");
+      longPressed = true;
+    }, 500);
+  }, false);
+  window.addEventListener("mouseup", function(e) {
+    clearInterval(longPress);
+    if (longPressed == true) {
+      document.body.classList.remove("is-longpress");
+      pushBalls(randBetween(50 + Math.ceil(multiplier), 100 + Math.ceil(multiplier)), e.clientX, e.clientY);
+      longPressed = false;
+    }
+    document.body.classList.remove("is-pressed");
+  }, false);
+  window.addEventListener("mousemove", function(e) {
+    let x = e.clientX;
+    let y = e.clientY;
+    pointer.style.top = y + "px";
+    pointer.style.left = x + "px";
+  }, false);
+} else {
+  console.log("canvas or addEventListener is unsupported!");
+}
+
+
+function updateSize() {
+  canvas.width = window.innerWidth * 2;
+  canvas.height = window.innerHeight * 2;
+  canvas.style.width = window.innerWidth + 'px';
+  canvas.style.height = window.innerHeight + 'px';
+  ctx.scale(2, 2);
+  width = (canvas.width = window.innerWidth);
+  height = (canvas.height = window.innerHeight);
+  origin = {
+    x: width / 2,
+    y: height / 2
+  };
+  normal = {
+    x: width / 2,
+    y: height / 2
+  };
+}
+class Ball {
+  constructor(x = origin.x, y = origin.y) {
+    this.x = x;
+    this.y = y;
+    this.angle = Math.PI * 2 * Math.random();
+    if (longPressed == true) {
+      this.multiplier = randBetween(14 + multiplier, 15 + multiplier);
+    } else {
+      this.multiplier = randBetween(6, 12);
+    }
+    this.vx = (this.multiplier + Math.random() * 0.5) * Math.cos(this.angle);
+    this.vy = (this.multiplier + Math.random() * 0.5) * Math.sin(this.angle);
+    this.r = randBetween(8, 12) + 3 * Math.random();
+    this.color = colours[Math.floor(Math.random() * colours.length)];
+  }
+  update() {
+    this.x += this.vx - normal.x;
+    this.y += this.vy - normal.y;
+    normal.x = -2 / window.innerWidth * Math.sin(this.angle);
+    normal.y = -2 / window.innerHeight * Math.cos(this.angle);
+    this.r -= 0.3;
+    this.vx *= 0.9;
+    this.vy *= 0.9;
+  }
+}
+
+function pushBalls(count = 1, x = origin.x, y = origin.y) {
+  for (let i = 0; i < count; i++) {
+    balls.push(new Ball(x, y));
+  }
+}
+
+function randBetween(min, max) {
+  return Math.floor(Math.random() * max) + min;
+}
+
+function loop() {
+  ctx.fillStyle = "rgba(255, 255, 255, 0)";
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < balls.length; i++) {
+    let b = balls[i];
+    if (b.r < 0) continue;
+    ctx.fillStyle = b.color;
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2, false);
+    ctx.fill();
+    b.update();
+  }
+  if (longPressed == true) {
+    multiplier += 0.2;
+  } else if (!longPressed && multiplier >= 0) {
+    multiplier -= 0.4;
+  }
+  removeBall();
+  requestAnimationFrame(loop);
+}
+
+function removeBall() {
+  for (let i = 0; i < balls.length; i++) {
+    let b = balls[i];
+    if (b.x + b.r < 0 || b.x - b.r > width || b.y + b.r < 0 || b.y - b.r > height || b.r < 0) {
+      balls.splice(i, 1);
+    }
+  }
+}
+}
+clickEffect();//调用特效函数
+</script>
+  </body>
+</html>

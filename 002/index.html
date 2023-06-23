@@ -1,0 +1,677 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title></title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><p><strong><span>Promoting autotrophic sulfate reduction in bioelectrochemical systems</span></strong></p><p><span> </span></p><p><strong><span>Enric Blázqueza, Juan Antonio Baezaa, David Gabriela, Albert Guisasolaa</span></strong></p><p><span>aDepartment of Chemical Engineering, Escola d’Enginyeria, Universitat Autònoma de Barcelona, 08193 Bellaterra, Spain</span></p><p><span> </span></p><p><strong><span>ABSTRACT</span></strong><span> </span></p><p><span>There are many industrial effluents such as acid mining drainage or the effluent of flue gas desulfurization with high sulfate content, which may cause imbalances in the natural sulfur cycle and can be hazardous to human health. Traditionally high-sulfate content wastewaters are treated with physical-chemical processes, which pose many drawbacks such as chemical sludge generation, high costs and nil sulfur recovery. However, the recent appearance of bioelectrochemical systems has opened a plethora of new opportunities in environmental engineering. Among them, bioelectrochemical sulfate reduction is a promising alternative since there is no need of organic matter to drive the process and sulfur can be recovered as sulfide metals or elemental sulfur with a microaeration process. This paper shows the guidelines for the successful start-up of a bioelectrochemical system aiming at sulfur recovery using both experimental data and a theoretical framework. The effect of the main operational parameters (pH, cathodic potential…) to the cell performance and the possibility of hydrogen as an intermediate are discussed.</span></p><p><span> </span></p><p><strong><span>Key words:</span></strong><span> Biocathode, Bioelectrochemical systems, Sulfate reduction, Sulfate Reducing Bacteria.</span></p><p><span> </span></p><p><strong><span>1.</span></strong><span>  </span><strong><span>INTRODUCTION</span></strong></p><p><span>Sulfate is one of the most abundant anions in the environment. Naturally, volcanic SO2 and H2S lead to high concentration of photochemically generated sulfate in seawater1. High sulfate content wastewaters are produced from industrial processes even if a large source of sulfur-derived wastewater comes from the atmosphere discharge2. Sulfur-containing fossil fuels account for approximately 90% of the anthropogenic emission of SO2 3. Physical-chemical flue gas desulfurization (FGD) systems are probably the most widely used techniques to control SO2 emissions from industries4, but these technologies require additional chemicals and energy inputs5. For this reason, biological treatments have also been studied as an alternative to physical-chemical for SO2 removal with certain success6. The effluents from these physical-chemical and biological techniques contain high loads of sulfite and sulfate due to SO2 absorption and oxidation. Sulfate is not a very harmful pollutant but excessive quantities of SO42- can affect public water supplies and human health. The upper concentration limit of sulfate in water intended for human consumption is recommended at 250 mg L-1 7.Therefore, sulfate rich wastewaters require treatment before being released to the environment.</span></p><p><span>Sulfate is currently removed via physical-chemical methods (i.e. precipitation, reverse osmosis, electrodialysis or nanofiltration)8 with several drawbacks such as their high cost, production of a waste chemical sludge to be treated, unreliable efficiency and the need to treat the effluent from other pollutants9. The biological treatment is restricted to anaerobic reactors where biological sulfate reduction is an efficient method for removing sulfate from wastewaters. Sulfate reducing bacteria (SRB) are anaerobic microorganism that use SO42- as a terminal electron acceptor for the degradation of organic compounds, resulting in the production of sulfide10. Sulfate biological reduction to H2S may lead to significant issues as corrosion, bad odors and toxic issues on human health11.</span></p><p><span>Sulfur recovery from sulfate could be carried out by several methods: i) sulfate reduction to sulfide and metal sulfide precipitation using metal cations due to its too low solubility and ii) sulfur reduction to sulfide and partial oxidation to elemental sulfur in microaerophilic reactors where the limiting oxygen concentration stops the sulfide oxidation to elemental sulfur. Solubility of different metal sulfides, which is very low (mainly at pH between 6 and 10), depends on pH . For this reason sulfide precipitation occurs at concentrations of &lt; 1 µg Me2+ L-1 for several heavy metals12. Additionally, in the presence of oxygen, sulfur-oxidizing bacteria (SOB) can oxidize sulfide to sulfate, even if SOB produce elemental sulfur (Sº) under oxygen limiting conditions13.</span></p><p><span>Sulfide precipitates with the presence of heavy metals according to the following reaction:</span></p><p><span>                                               (1)</span></p><p><span>Sulfide can be oxidized by oxygen13 and nitrate14 to sulfate or to elemental sulfur. Biological oxidation reactions of H2S by SOB are described by Munz et al.15 according the following catabolic reactions: </span></p><p><span>      (2)</span></p><p><span>      (3)</span></p><p><span>A bioelectrochemical system (BES) is a novel technology where an oxidation reaction occurs in an anodic compartment and a reduction reaction occurs in a cathodic compartment while one or both reactions are catalyzed by bacteria. BES operation relies on the presence of anode respiring bacteria (ARB) known as exoelectrogens, which are able to use an external insoluble electrode as electron acceptor. ARB use organic matter as electron donor and donate the last electron involved in their metabolic pathway to the electrode (anode), which flow through an electric circuit to the cathode. The current of electrons produced from the anode to the cathode thanks to the bacteria is the newest approach of bioelectricity generation16. When the oxidation in the anode compartment is catalyzed by bacteria and the chemical reduction of oxygen takes place in the cathode, the BES is called microbial fuel cell (MFC). However, depending on the semireactions occurring, the process may not be thermodynamically spontaneous and, then, an additional voltage is required (for example to produce H2)17. This new BES type is called microbial electrolysis cell (MEC).</span></p><p><span>Sulfate rich wastewaters are usually deficient in electron donors and hence external addition is necessary in such cases18. Hydrogen is commonly used as electron donor for sulfate reduction because, according to thermodynamics, is more favorable than that of methanogenesis19. For this reason, SRB are generally more efficient in hydrogen utilization than methanogenic bacteria20. In wastewater treatment systems, H2 can be supplied to the reactor or generated from other electron donors.</span></p><p><span>Sulfate removal in a biologically catalyzed cathode has been studied by several authors21–23. These works performed a two-chamber MEC in order to separate both compartments and to study the sulfate removal efficiency in the biocathodic compartment and to evaluate the current output and electron recovery efficiency. Coma et al.21 and Luo et al.22 obtained sulfate removal efficiencies of 15 – 16 mg S-SO42- L-1 d-1 from an initial concentration of 33.3 mg S-SO42- L-1 d-1. Interestingly, Su et al.23 reported that sulfate-reducing biofilms could accept electrons from electrodes directly without hydrogen production.</span></p><p><span>The aim of this study was to detail the key aspects for the design of bioelectrochemical systems aiming at sulfate recovery using experimental data and theoretical discussions. </span></p><p>&nbsp;</p><p><span> </span></p><p><strong><span>2.</span></strong><span>  </span><strong><span>MATERIAL AND METHODS</span></strong></p><p><strong><span>2.1. Hydrogenotrophic and autotrophic SRB batch cultivation</span></strong></p><p><span>Hydrogenotrophic and autotrophic SRB (AutH2-SRB) were grown in a 1L reactor operated in batch mode with a headspace of 0.6 L and connected to a gas sampling bag with a twist type valve (Cali-5-Bond, Ritter) of 1 L (Figure1a). This reactor was inoculated with biomass from an experimental sewer system highly enriched with SRB24. Our reactor was sparged with CO2 which served as: i) carbon source, ii) pH buffer, and iii) agent for H2S stripping, preventing thus, a possible inhibition. CO2 was fed with the gas sample bag disconnected from the reactor. Then, the gas sampling bag was filled with a mixture of H2 and CO2 and attached to the reactor so that both were continuously absorbed in the liquid phase following gas-liquid equilibrium. H2 acted as sole electron donor. The gas phase consisted of approximately 60% of H2 and 40% of CO2. Every 3-4 days, 125 mL of sludge were purged and the volume was replaced with new mineral medium. Sulfate content was ensured by periodically adding 10 mL of a concentrate pulse of MgSO4 to reach a concentration of 500 mg S-SO42- L-1. The pH of the SRB batch cultivation reactor was measured (Crison micropH 2001, Crison Instruments) but not controlled.</span></p><p><span>The mineral medium used for the SRB growth was a modification from that used in Coma </span><em><span>et al.</span></em><span> 21. The medium (1 L) was prepared with tap water and contained 2311 mg MgSO4·7H2O, 146.6 mg NHCO3, 9.2 mg NH4Cl, 327 mg Na2HPO4·2H2O, 144 mg KH2PO4·2H2O, 1.7 mg CaCl2·2H2O, 1.6 mg KCl and 1 mL of microelements solution. The microelements solution was described by Montpart et al. 25 and contained per liter: 1000 mg EDTA, 164 mg CoCl2·6H2O, 228 mg CaCl2·2H2O, 20 mg H3BO3, 40 mg Na2MoO4·2H2O, 2 mg Na2SeO3, 20 mg Na2WO4·2H2O, 40 mg NiCl2·6H2O, 2320 mg MgCl2, 1180 mg MnCl2·4H2O, 100 mg ZnCl2, 20 mg CuSO4·5H2O and 20 mg AlK(SO4)2. </span></p><p><span> </span></p><p><span>Figure 1: Schematic of the experimental systems used: a) AutH2-SRB growth reactor setup, b) Cube-shape MEC setup and c) H-shape MEC setup.</span></p><p><span> </span></p><p><strong><span>2.2. Bioelectrochemical cells configuration</span></strong></p><p><span>The BES consisted of a two-chamber MEC with an anode and a cathode separated by an ion exchange membrane. Two different cells were used: i) cube-shape MEC (35 mL of cathode compartment) (Figure 1b) and ii) H-shape MEC (350 mL of cathode compartment) (Figure 1c). </span></p><p><span>The cube-MEC consisted of two 28mL methacrylate vessels separated by the membrane with a lateral 3.8 cm diameter aperture. The cathode compartment had a glass cylinder on the top (with a total cathode compartment volume of 40mL), tightly sealed with PTFE rubber cap that enabled gas diffusion to the catholyte using a gas-tight bag (0.1 L, Cali-5-bond, Ritter) connected to the glass cylinder. The anode and the cathode consisted of a titanium wire connected to a graphite fiber brush (20 mm diameter x 30 mm length) made with fibers of diameter 7.2 µm (type PANEX33 160K, ZOLTEK). The graphite brush placed on the cathode was thermally treated at 450 ºC for 30 min to enhance biomass adhesion. Both electrodes were connected to a power source (HQ Power, PS-23023) applying a potential of approximately 2.2 V to obtain a cathode potential of -1 V (vs Ag/AgCl). </span></p><p><span>The H-MEC comprised two 400mL glass vessels separated by a membrane with a lateral 7 cm diameter aperture. The cathode consisted of a graphite fiber brush (70 mm diameter x 70 mm length) made with the same fibers of 7.2 µm of diameter. The graphite brush was also thermally treated. The cathode compartment was stirred and was connected to a gas bag (1 L, Cali-5-bond, Ritter). The anode was a titanium sheet (Ti plus 50 g m-2 Pt, Magneto, The Netherlands). Both electrodes were connected to a power source applying a potential of approximately 2.8 V to obtain a cathode potential of -1 V (vs Ag/AgCl). In both MEC configurations, an Ag/AgCl reference electrode (+210 mV vs SHE, Crison reference electrode 5240) was used to measure the cathode potential.</span></p><p><span>Two different ion-exchange membranes were used: i) anion-exchange membrane, AEM (AMI-7001CR, Membranes International INC) and ii) cation-exchange membrane, CEM (Nafion® 117, Dupont, USA). Before its use, ion-exchange membranes were pretreated to allow membrane hydration and expansion. The AEM was soaked overnight in a 5 wt% sodium chloride solution at 37ºC according to the supplier indications. The pretreatment procedure for the CEM, meanwhile, consisted of boiling the membrane in a 3 wt% H2O2 solution, followed by boiling it in deionized water and then, boiling it in 0.5 M H2SO4 for at least 1 h each step. Finally, the membrane was boiled in deionized water for an additional 1 h to remove the remaining H2SO426.</span></p><p><span>Cathodes of both MECs were inoculated with purges from the hydrogenotrophic and autotrophic SRB (AutH2-SRB) growing reactor. A first cycle was done using 50% of AutH2-SRB purges and 50% of the mineral medium used for SRB growth. After that, the following cycles replaced 60% of the medium by 30% of fresh mineral medium and 30% of AutH2-SRB fresh purges. A solution of 50 g S-SO42- L-1 was used to obtain an initial concentration of approximately 500 mg S-SO42- L-1, adding 0.28 mL in the cube-MEC cathode compartment and 2.8 mL in the H-MEC cathode compartment. The medium was buffered at pH 7 using 25mM PBS. The anode compartments were filled with a solution of 1 g NaCl L-1 to increase the conductivity and to facilitate water electrolysis. </span></p><p><span>During the operation of the H-MEC, the pH was controlled at 7.0 (Crison micropH 2001, Crison Instruments) through the automatic addition of HCl (1 M) with an automatic dispensing burette (Multi-Burette 2S-D, Crison Instruments). The pH of the cube-MEC was also measured, but not controlled.</span></p><p><strong><span>2.3. Analytical methods</span></strong></p><p><span>Samples from MECs were collected periodically from the medium of the bioelectrochemical cycles for the measurement of sulfate, sulfite and thiosulfate. Samples were serially diluted, filtered (0.22 µm) and analyzed using an Ion Chromatograph (Dionex ICS-2000) with an Ultimate 3000 Autosampler Column Compartment, an IonPac AS18 column and an IonPac AG18 pre-column (ThermoScientific, USA). Sulfide was analyzed off-line with a sulfide selective electrode (VWR International Eurolab, S.L) using a Sulfide Antioxidant Buffer (SAOB) to preserve samples from oxidation and to keep all dissolved sulfide species as S2-.</span></p><p><span> </span></p><p><strong><span>2.4. Aerobic activity measurement</span></strong></p><p><span>Resarzurin-resorufin was used for the detection of aerobic activity in the cathode. Resazurin (Raz) is a smart tracer that undergoes an irreversible reduction to resorufin (Rru) in the presence of cellular metabolic activity27. Under appropriate reducing conditions, Raz (blue in color) becomes Rru (pink in color) because of an irreversible oxygen atom lost.</span></p><p><span> </span></p><p><span> </span></p><p><strong><span>3. RESULTS AND DISCUSSION</span></strong></p><p><strong><span>3.1. Bioelectrochemical sulfur recovery: concept description</span></strong></p><p><span>Bioelectrochemical sulfur recovery is a two-step process (Figure 2). In a first step, sulfate is biologically reduced to sulfide in the cathode of a MEC. This process requires a reducing agent which is provided by a solid electrode, the cathode. The cathode reduction potential is set to -1.0V so that hydrogen is produced and serves as electron donor for sulfate reduction. </span></p><p><span> </span></p><p><span>Figure 2: Sulfur recovery in a bioelectrochemical system in two steps i) sulfate reduction to sulfide by AutH2-SRB, and ii) sulfur recovery by partial oxidation of sulfide to elemental sulfur or metal sulfide precipitation.</span></p><p><span>A further subject of interest is whether the cathode can be set to a higher potential so that electrons are directly used without hydrogen as intermediary. Electrons come from the anode where, in this case, water electrolysis is occurring. The electromotive force of this cell is negative and, hence, the system is not thermodynamically spontaneous. A certain potential and, hence, a certain energy input needs to be applied. In our work, this energy was supplied with a potentiostat (which maintained the cathode at a desired potential) and hence sulfate reduction depends on the hydrogen generated and, thus, on the energy applied. There exists the possibility of reducing (or even suppressing) this energy input by optimizing anodic water electrolysis (novel electrode materials, optimized anolyte with high conductivity, use of renewable energy sources as solar panels…). However, this optimization was out of the scope of this work. CO2 was the carbon source in the cathode leading to no need of organic matter to drive the process, which is one of the advantages main of the system.</span></p><p><span>Once sulfate is reduced to sulfide, a sulfur recovery step is required. This step is usually a precipitation as sulfide metal salt or as elemental sulfur. In the former scenario an optimum choice of the cation is required while in the latter an electron acceptor for the oxidation process to elemental sulfur should be provided.</span></p><p><span> </span></p><p><strong><span>3.2. Key aspect 1: Selecting the adequate cathodic population</span></strong></p><p><span>  Sulfate reduction in the cathode is a biological process and, thus, a carbon source and an electron donor are needed. In this case, CO2 was the carbon source and the hydrogen produced in the cathode was the electron donor. Then, our target population was autotrophic hydrogenotrophic SRB (AutH2-SRB). An AutH2-SRB-enriched sludge was obtained in a separate conventional batch reactor, which was inoculated with biomass coming from an experimental sewer system. This batch reactor was weekly spiked with sulfate pulses, while CO2 and hydrogen were provided through a gas sampling bag as described in section 2. Sulfate reduction was periodically evaluated (Figure 3) leading to significant sulfate reduction rates. Average sulfate removal rates of 36.4 ± 17.3 mg S-SO42- L-1 d-1 were reached. The highest observed sulfate removal rates were obtained after feeding the reactor with CO2 and H2, with values up to 68.8 mg S-SO42- L-1 d-1 on day 7 and 65.4 mg S-SO42- L-1 d-1 on day 10. Hydrogen was sparged at the start of the cycle and, then, connected a pressurized gas bag to the reactor which provided H2 to the system as long as it was being consumed. At the end of the cycle, sulfate reduction rates were lower and, H2 concentration in the liquid was limiting. Hence, a recommendation for further work is to increment H2 concentration in the liquid as much as possible, for example with a continuous sparging and gas recycle. </span></p><p><span> </span></p><p><span>Figure 3: Operation performance of the AutH2-SRB growth reactor. Arrows indicate the days when the reactor was sparged with CO2 and H2.</span></p><p><span>Figure 3 shows that total dissolved sulfide (TDS = S2- + HS- + H2S (aq)) was the main product of sulfate removal. Sulfite (SO32-) and thiosulfate (S2O32-) were not detected throughout the reactor operation and no precipitated sulfide metals were observed. Since the biological partial sulfate reduction to elemental sulfur has not been described10, it was assumed that sulfate reduction products not present in the liquid phase as TDS left the reactor as H2S (g) in the gas phase. Thus, a slight sulfur unbalance was observed.</span></p><p><span>CO2 was the only carbon source, which showed an interesting buffer effect that helped to maintain the pH value between 6.5 and 7, optimal conditions for SRB growth. Moreover, sparging CO2 had a third beneficial effect. H2S was removed, via sparging, from the liquid and gas phases avoiding, thus, inhibitory concentrations of sulfide (higher than 500 mg H2S L-1)28. Bicarbonate (HCO3-) could be used also as carbon source and pH buffer, but HCO3- cannot allow for H2S removal, and inhibitory concentrations of sulfide could arise in the liquid phase of the reactor.</span></p><p><strong><span>3.3. Key aspect 2: Selecting the adequate cell configuration</span></strong></p><p><span>MECs have been classified between single and double-chamber cell configurations based on the utilization of an ion-exchange membrane to physically separate anodic and cathodic chambers. The benefits of the membrane are to avoid the contact between the cathodic and anodic compounds and, thus, to have different concentrations of the desired compounds. However, this separation is at expenses of high potential losses due to the membrane resistance, which may challenge the economic feasibility of the cell. We chose a double-chamber cell to avoid anodic oxidation products to interfere with our cathodic processes and to avoid any uncontrolled sulfide oxidation to sulfate.</span></p><p><span>Two different types of ion-exchange membranes (CEM and AEM) were tested throughout the experiments. CEM was expected to permit a H+ flow through the membrane from the anode to the cathode. This process could help to maintain the pH of the cathode similar to the initial pH, but not all cations that went through the CEM were protons. Na+ (belonging to the anolyte) and metal cations (coming from the anode oxidation) also gone from the anode to the cathode favoring metal sulfide precipitation. Moreover, it was observed an osmotic effect because the Nafion membrane let the transference of water, changing the cathodic and anodic volumes and concentrations. For this reason, CEM was not used and AEM was selected. In this case, sulfates and sulfides could go through the membrane from the cathode to the anode, but Cl- and PO43- were the main anions of the catholyte reducing the transference of sulfur compounds.</span></p><p><span>The cathodic potential was assessed using a potentiostat. Hence, the optimum potential that balanced the energy input to the system with the adequate hydrogen production (as describe above, H2 limitations are very detrimental for sulfate reduction kinetics) was chosen. In this case, we chose a potential of -1 V to ensure reasonable hydrogen production at low energy expenses (approximately 2.2 V for cube-MEC and 2.8 V for H-MEC). Higher potential values would lead to lower hydrogen production. There is the possibility that SRB used electrons directly from the cathode, which would lower the energetic requirements of the system. This emerging phenomenon has been described as microbial electrosynthesis (MES) and some examples have been recently described in the literature. Some hydrogenotrophic bacteria are described to possess this ability and, hence, it would be an option for further research. However, the possibility of obtaining high sulfate reduction rates with direct electron utilization is, nowadays, under discussion and energy balances are required to assess the energy savings provided justify the probable reduction of sulfate removal rate. </span></p><p><span>Two different cells were tested, both were two-chamber cells with a fixed cathodic potential at -1 V (vs Ag/AgCl): an H-shape MEC (350 mL of cathode compartment) with pH control, fixed at pH 7, and a cube-shape MEC (35 mL of cathode compartment) without pH control. The pH control was used to evaluate the efficiency of the process while the microorganisms of the cathode were working at optimal conditions of pH (H-MEC) or not (cube-MEC).</span></p><p><span>The different sulfur compounds detected are shown in Figure 4. The sulfate removal rate in both cases was higher than that observed in the batch reactor (Figure 3), being the maximum sulfate removal rate in the first day around, 117 mg S-SO42- L-1 d-1 in H-MEC and 131 mg S-SO42- L-1 d-1 in the cube-MEC. We think that these higher removal rates were because of the continuous production of H2 in the cathode, which occur at cathodic theoretical potential of -0.41 V (vs SHE). </span></p><p><span>  The total sulfate reduction rate obtained after the cycle in the H-MEC (44.7 mg S-SO42- L-1 d-1) was higher than in the cube-MEC (34.4 mg S-SO42- L-1 d-1) because of pH-control. SRB are reported to grow at a wide pH range (3 to 9.829) but most of S-conversion systems operate under conditions of acid and neutral pH2.</span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span>Figure 4: Sulfate reduction by SRB of one cycle operation at A) H-MEC and B) Cube-MEC.</span></p><p><span>For this reason an S mass unbalance was observed. Sulfite and thiosulfate were not detected in any cell. H2S (aq) detected was &lt; 0.01 mg S-S2- L-1 in all measurements from the H-MEC, whereas the higher concentration of H2S (aq) detected in the cube-MEC was 7.6 mg S-S2- L-1 in the first day. The rest of the measurements were &lt; 0.50 mg S-S2- L-1. As opposed to SRB growth reactor, sulfide was not being accumulated in the medium and no more S-compounds were detected. Elemental sulfur and metal sulfides were not measured because these compounds tend to be accumulated by the biomass and in the surface of the cathode, membrane and the vessel. Metals from the anode oxidation and oxygen from the water electrolysis may go through the ion exchange membrane and cause metal sulfide precipitation and sulfide partial oxidation to sulfur.</span></p><p><strong><span>3.4. Sulfur recovery mechanisms</span></strong></p><p><span>  The different sulfur compounds measured are shown in Figure 5. In both cell configurations SO42- was consumed during the first days of the cycle at high sulfate removal rates. Sulfide was just observed in cube-MEC obtaining a maximum concentration of 20.1 mg S-S2- L-1 at day 1. </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span> </span></p><p><span>Figure 5: Sulfate reduction by SRB and sulfide oxidation of one cycle operation at A) H-MEC and B) Cube-MEC.</span></p><p><span>At this day, sulfate removal rate was 154.2 mg S-SO42- L-1 d-1 showing that the sulfate removal was higher than the sulfide production. At day 2, sulfide decreased to 17.0 mg S-S2- L-1, but sulfate also was removed at 37.8 mg S-SO42- L-1 d-1. The H-MEC showed also a high removal rate during the first days of the cycle, but no sulfide compounds were detected. An unbalance of S compounds was observed in both MEC configurations, which happened due to two possible reasons: i) metal sulfide precipitation as described in equation (1) or ii) sulfur accumulation as described in equation (2). But in both cycles, the last measurement showed an increase of SO42- concentration in the medium while H2S (aq) was not detected in H-MEC and 4.6 mg S-S2- L-1 were measured in the cube-MEC. Moreover, this sulfate production (20.3 mg S-SO42- L-1 d-1 in cube-MEC and 28.7 mg S-SO42- L-1 d-1 in H-MEC) were higher than the sulfide removal (4.1 mg S-S2- L-1 d-1 in the cube-MEC and 0.0 mg S-2- L-1 d-1 in the H-MEC). Because of the water electrolysis in the anode compartment, the oxygen produced could pass through the AEM and be accessible to the biocathode culture. The presence of oxygen may have favored SOB growth and for this reason an increase of SO42- was observed in both cell configurations. </span></p><p><span>Resazurin is a redox-sensitive phenoxazine frequently used to estimate biological activity. Raz reacts in the presence of dehydrogenases, which are enzymes involved in many of the vital metabolic processes (catabolic and anabolic) of living organisms30. In this experiment, Raz test confirmed the aerobic activity in the cathode compartment.</span></p><p><span> </span></p><p><strong><span>4. CONCLUSIONS</span></strong></p><p><span>AutH2-SRB was successfully cultivated because of its high sulfate removal rates with H2. Similar results of sulfate reduction rate were obtained in H-MEC and Cube-MEC configuration cells showing higher sulfate reduction rates in H-MEC than in Cube-MEC configuration due to its pH control. Moreover, no significant differences were observed between different volumes of cells. Oxygen produced by water electrolysis in the anode lead to sulfur oxidation in both configuration cells because AEM let O2 to pass through the membrane.</span></p><p><strong><span>REFERENCES</span></strong></p><p><span>[1]    Farquhar, J. and Wing, B.A. &#39;Multiple Sulfur Isotopes and the Evolution of the Atmosphere&#39;. </span><em><span>Earth Planet. Sci. Lett.</span></em><span> </span><strong><span>213</span></strong><span> (1-2) (2003) 1-13.</span></p><p><span>[2]    Hao, T.W., Xiang, P.Y., Mackey, H.R., Chi, K., Lu, H., Chui, H.K., van Loosdrecht, M.C.M. and Chen, G.H. &#39;A Review of Biological Sulfate Conversions in Wastewater Treatment&#39; </span><em><span>Water Res.</span></em><span> </span><strong><span>65</span></strong><span> (2014) 1-21.</span></p><p><span>[3]    Brimblecombe, P. and Lein, A. Y. &#39;Evolution of the Global Biogeochemical Sulphur Cycle&#39; (John Wiley and Sons, Chichester, England, 1989).</span></p><p><span>[4]    Srivastava, R.K. and Jozewicz, W. &#39;Flue Gas Desulfurization: The State of the Art&#39;. </span><em><span>J. Air Waste Manage. Assoc.</span></em><span> </span><strong><span>51</span></strong><span> (12) (2001)1676-1686.</span></p><p><span>[5]    Devinny, J.S., Deshusses, M.A. ansd Webster, T.S. &#39;Biofiltration for Air Pollution Control, (Lewis Publishers, Boca Raton, Fla, 1998).</span></p><p><span>[6]    Philip, L. and Deshusses, M.A. &#39;Sulfur Dioxide Treatment from Flue Gases Using a Biotrickling Filter−Bioreactor System&#39;. </span><em><span>Environ. Sci. Technol.</span></em><span> </span><strong><span>37</span></strong><span> (9) (2003) 1978-1982.</span></p><p><span>[7]    Clair, N., Perry, L. and Gene F. &#39;Chemistry for Environmental Engineering and Science&#39; (Mcgraw-Hill, New York, 2003).</span></p><p><span>[8]    Bilstad, T. &#39;Sulphate Separation from Seawater by Nanofiltration&#39;. </span><em><span>Prod. Water</span></em><span> </span><strong><span>46</span></strong><span> (1992), 503-509.</span></p><p><span>[9]    Lens, P.N.L., Visser, A., Janssen, A.J.H., Pol, L.W.H. and Lettinga, G., Biotechnological Treatment of Sulfate-Rich Wastewaters. </span><em><span>Crit. Rev. Environ. Sci. Technol.</span></em><span> </span><strong><span>28</span></strong><span> (1) (1998), 41-88.</span></p><p><span>[10]   Muyzer, G. and Stams, A.J.M. &#39;The Ecology and Biotechnology of Sulphate-Reducing Bacteria&#39;. </span><em><span>Nat. Rev. Microbiol.</span></em><span> </span><strong><span>6</span></strong><span>, 2008, 441.</span></p><p><span>[11]   Pol, L.W.H., Lens, P.N.L., Stams, A.J.M., Lettinga, G. &#39;Anaerobic Treatment of Sulphate-Rich Wa<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山羊の前端小窝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: rgb(240, 230, 240);
+        }
+        .img{
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-image: url('./goat.gif');
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="img"></div>
+</body>
+    <script>
+        let img = document.querySelector('.img')
+        // 定义小图片的旋转角度
+        let deg = 0
+        // 定义小图片位于网页左侧的位置
+        let imgx = 0
+        // 定义小图片位于网页顶部的位置
+        let imgy = 0
+        // 定义小图片x轴的位置
+        let imgl = 0
+        // 定义小图片y轴的位置
+        let imgt = 0
+        // 定义小图片翻转的角度
+        let y = 0 
+        // 定义一个计数器
+        let index = 0
+
+        window.addEventListener('mousemove',function(xyz){
+            // 获取网页左侧距离的图片位置
+            imgx = xyz.x - img.offsetLeft - img.clientWidth /2
+            // 多去网页顶部距离图片的位置
+            imgy = xyz.y - img.offsetTop - img.clientHeight /2
+            // 套入公式，定义图片的旋转角度
+            deg = 360*Math.atan(imgy/imgx)/(2*Math.PI)
+            // 每当鼠标移动的时候重置index
+            index= 0
+            // 定义当前鼠标的位置
+            let x = event.clientX
+            // 当鼠标的x轴大于图片的时候，提普安就要对着鼠标，所以需要将图片翻转过来
+            // 否则就不用翻转
+            if(img.offsetLeft<x){
+                y=-180
+            }else{
+                y=0
+            }
+        })
+        setInterval(()=>{
+            // 设置小图片的旋转和翻转
+            img.style.transform = "rotateZ("+deg+"deg) rotateY("+y+"deg)"
+            index++
+            // 在这里设置小图片的位置和速度，并判断小图片到达鼠标位置时停止移动
+            if(index<50){
+                imgl+=imgx/50
+                imgt+=imgy/50
+            }
+            img.style.left = imgl+"px"
+            img.style.top = imgt+"px"
+        },10)
+    </script>
+</html>stewaters&#39; </span><strong><span>9</span></strong><span> (3-4) (1998) 213-224.</span></p><p><span>12]   Lewis, A.E. &#39;Review of Metal Sulphide Precipitation&#39;. </span><em><span>Hydrometallurgy</span></em><span> </span><strong><span>104</span></strong><span> (2), 2010, 222-234.</span></p><p><span>[13]   López, L.R., Bezerra, T., Mora, M., Lafuente, J. and Gabriel, D. &#39;Influence of Trickling Liquid Velocity and Flow Pattern in the Improvement of Oxygen Transport in Aerobic Biotrickling Filters for Biogas Desulfurization&#39; </span><em><span>J. Chem. Technol. Biotechnol.</span></em><span> in press, (2015).</span></p><p><span>[14]   Campos, J.L., Carvalho, S., Portela, R., Mosquera-Corral, A. and Méndez, R.&#39;Kinetics of Denitrification Using Sulphur Compounds: Effects of S/N Ratio, Endogenous and Exogenous Compounds&#39; </span><em><span>Bioresour. Technol.</span></em><span> </span><strong><span>99</span></strong><span> (5), 1293-1299.</span></p><p><span>[15]   Munz, G., Gori, R., Mori, G. and Lubello, C &#39;Monitoring Biological Sulphide Oxidation Processes Using Combined Respirometric and Titrimetric Techniques&#39; </span><em><span>Chemosphere</span></em><span> </span><strong><span>76</span></strong><span> (5) (2009) 644-650.</span></p><p><span>[16]   Logan, B.E., Hamelers, B., Rozendal, R., Schröder, U., Keller, J., Freguia, S., Aelterman, P., Verstraete, W. and Rabaey, K. &#39;Microbial Fuel Cells: Methodology and Technology&#39;. </span><em><span>Environ. Sci. Technol.</span></em><span> </span><strong><span>40</span></strong><span> (17), 5181-5192.</span></p><p><span>[17]   Logan, B. &#39;Scaling up Microbial Fuel Cells and Other Bioelectrochemical Systems&#39; </span><em><span>Appl. Microbiol. Biotechnol.</span></em><span> </span><strong><span>85</span></strong><span> (6) (2010) 1665-1671.</span></p><p><span>[18]   Liamleam, W. and Annachhatre, A.P. &#39;Electron Donors for Biological Sulfate Reduction&#39; </span><em><span>Biotechnol. Adv.</span></em><span> </span><strong><span>25</span></strong><span> (5), (2007) 452-463.</span></p><p><span>[19]   Weijma, J., Gubbels, F., Hulshoff Pol, L.W., Stams, A.J., Lens, P., and Lettinga, G. &#39;Competition for H2 between Sulfate Reducers, Methanogens and Homoacetogens in a Gas-Lift Reactor&#39; </span><em><span>Water Sci. Technol.</span></em><span> *</span><strong><span>45</span><span>*</span></strong><span>  (2002) 75-80.</span></p><p><span>[20]   Davidova, I. and Stams, A. &#39;Sulfate Reduction with Methanol by a Thermophilic Consortium Obtained from a Methanogenic Reactor&#39;. </span><em><span>Appl. Microbiol. Biotechnol.</span></em><span> 4</span><strong><span>6 (3</span></strong><span>) (1996) 297-302.</span></p><p><span>[21]   Coma, M., Puig, S., Pous, N., Balaguer, M.D. and Colprim, J. &#39;Biocatalysed Sulphate Removal in a BES Cathode&#39; </span><em><span>Bioresour. Technol.</span></em><span> *</span><strong><span>130</span><span>*</span></strong><span> (2013) 218-223.</span></p><p><span>[22]   Luo, H., Fu, S., Liu, G., Zhang, R., Bai, Y. and Luo, X. &#39;Autotrophic Biocathode for High Efficient Sulfate Reduction in Microbial Electrolysis Cells&#39; </span><em><span>Bioresour. Technol.</span></em><span> </span><strong><span>167</span></strong><span> (2014) 462-468.</span></p><p><span>[23]   Su, W., Zhang, L., Tao, Y., Zhan, G. and Li, D. &#39;Sulfate Reduction with Electrons Directly Derived from Electrodes in Bioelectrochemical Systems. </span><em><span>Electrochem. commun.</span></em><span> </span><strong><span>22</span></strong><span> (1) (2012) 37-40.</span></p><p><span>[24]   Auguet, O., Pijuan, M., Guasch-Balcells, H., Borrego, C.M. and Gutierrez, O. &#39;Implications of Downstream Nitrate Dosage in Anaerobic Sewers to Control Sulfide and Methane Emissions&#39; </span><em><span>Water Res.</span></em><span> </span><strong><span>68</span></strong><span> (2015) 522-532.</span></p><p><span>25]   Montpart, N., Ribot-Llobet, E., Garlapati, V.K., Rago, L., Baeza, J.A., Guisasola, A. &#39;Methanol Opportunities for Electricity and Hydrogen Production in Bioelectrochemical Systems&#39; </span><em><span>Int. J. Hydrogen Energy</span></em><span> </span><strong><span>39</span></strong><span> (2) (2014) 770.</span></p><p><span>[26]   Lu, Z., Polizos, G., Macdonald, D. D. and Manias, E. &#39;State of Water in Perfluorosulfonic Ionomer (Nafion 117) Proton Exchange Membranes&#39; </span><em><span>J. Electrochem. Soc.</span></em><span> </span><strong><span>155</span></strong><span> (2) (2008) 163-171.</span></p><p><span>[27]   González-Pinzón, R., Haggerty, R. and Myrold, D.D. &#39;Measuring Aerobic Respiration in Stream Ecosystems Using the Resazurin-Resorufin System&#39; </span><em><span>J. Geophys. Res.</span></em><span> </span><strong><span>117</span></strong><span> (2012) 1-10.</span></p><p><span>[28]   Reis, M.A., Almeida, J.S., Lemos, P.C. and Carrondo, M.J. &#39;Effect of Hydrogen Sulfide on Growth of Sulfate Reducing Bacteria&#39; </span><em><span>Biotechnol. Bioeng.</span></em><span> </span><strong><span>40</span></strong><span> (5) (1992) 593-600.</span></p><p><span>[29]   Goldhaber, M. B. </span><em><span>Treatise on Geochemistry</span></em><span> (Elsevier, 2003).</span></p><p><span>[30]   O’Brien, J., Wilson, I., Orton, T. and Pognan, F. &#39;Investigation of the Alamar Blue resazurin) Fluorescent Dye for the Assessment of Mammalian Cell Cytotoxicity&#39; </span><em><span>Eur. J. Biochem.</span></em><span> </span><strong><span>267</span></strong><span> (17) (2000) 5421-5426. </span></p><p><span> </span></p></div></div>
+</body>
+</html>
